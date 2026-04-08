@@ -1,5 +1,7 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaInstagram } from "react-icons/fa6";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import XIcon from '@mui/icons-material/X';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import "../App.css";
 
 const Header = () => (
@@ -12,13 +14,13 @@ const Header = () => (
     </nav>
     <div className="social-icons">
       <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-        <FaFacebook />
+        <FacebookIcon />
       </a>
-      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-        <FaTwitter />
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="X">
+        <XIcon />
       </a>
       <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-        <FaInstagram />
+        <InstagramIcon />
       </a>
     </div>
   </header>
