@@ -43,3 +43,40 @@ docker compose up --build
 - `GET /users`
 
 The backend will automatically create a `users` table in the PostgreSQL database.
+
+## Running Locally
+
+### Frontend
+
+1. Open a terminal in `frontend/`
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the app:
+   ```bash
+   npm run dev
+   ```
+4. Open the local URL shown by Vite.
+
+### Backend
+
+1. Open a terminal in `backend/`
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the API:
+   ```bash
+   npm run dev
+   ```
+
+### Run both with Docker Compose
+
+From the repository root:
+
+```bash
+docker compose up --build
+```
+
+This starts the backend API and PostgreSQL database together.

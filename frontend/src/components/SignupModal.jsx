@@ -1,9 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const SignupModal = ({ open, onClose, onLogin }) => {
+const SignupModal = ({ open, onClose, onLogin, onSignupSubmit }) => {
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
   const firstInputRef = useRef(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -42,6 +47,21 @@ const SignupModal = ({ open, onClose, onLogin }) => {
     };
   }, [open, onClose]);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      await onSignupSubmit({ fullName: name, email, password });
+      onClose();
+    } catch (err) {
+      setError(err.message || "Unable to create account.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!open) return null;
 
   return (
@@ -60,27 +80,42 @@ const SignupModal = ({ open, onClose, onLogin }) => {
           <p>Create your account in under a minute. Start washing smarter today.</p>
         </div>
 
-        <form className="signup-form" onSubmit={(event) => event.preventDefault()}>
-        
+        <form className="signup-form" onSubmit={handleSubmit}>
           <label htmlFor="signup-name">Full name</label>
-          <input 
+          <input
             ref={firstInputRef}
-            id="signup-name" 
-            type="text" 
-            placeholder="Your full name" 
-            required 
+            id="signup-name"
+            type="text"
+            placeholder="Your full name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
 
-        
           <label htmlFor="signup-email">Email address</label>
-          <input id="signup-email" type="email" placeholder="you@domain.com" required />
+          <input
+            id="signup-email"
+            type="email"
+            placeholder="you@domain.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-          
           <label htmlFor="signup-password">Password</label>
-          <input id="signup-password" type="password" placeholder="Create a password" required />
+          <input
+            id="signup-password"
+            type="password"
+            placeholder="Create a password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-          <button type="submit" className="btn signup-submit">
-            Create account
+          {error && <p className="form-error">{error}</p>}
+
+          <button type="submit" className="btn signup-submit" disabled={loading}>
+            {loading ? "Creating account..." : "Create account"}
           </button>
 
           <div className="signup-separator">

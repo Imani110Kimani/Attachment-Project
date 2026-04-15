@@ -224,6 +224,14 @@ body, html {
   box-shadow: none;
 }
 
+.hero-welcome {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -599,6 +607,12 @@ body, html {
   box-shadow: 0 0 0 3px rgba(101, 148, 177, 0.16);
 }
 
+.form-error {
+  margin: 0;
+  color: #c93939;
+  font-size: 0.95rem;
+}
+
 .signup-form input {
   width: 100%;
   max-width: 100%;
@@ -949,8 +963,8 @@ body, html {
   animation: floatCard 0.9s ease-out, floatDevice 6s ease-in-out infinite alternate;
   position: relative;
   transform-style: preserve-3d;
-  transform: rotateY(-8deg) rotateX(3deg);
-  box-shadow: 0 50px 120px rgba(7, 11, 25, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  transform: none;
+  box-shadow: none;
 }
 
 .chat-container::before {
@@ -1029,7 +1043,6 @@ body, html {
   border-radius: 22px;
   line-height: 1.75;
   max-width: 80%;
-  box-shadow: 0 10px 26px rgba(33, 60, 81, 0.08);
   animation: fadeInUp 0.5s ease forwards;
 }
 
@@ -1037,6 +1050,7 @@ body, html {
   align-self: flex-start;
   background: rgba(255, 255, 255, 0.94);
   color: var(--text);
+  box-shadow: none;
 }
 
 .message.user {
@@ -1187,7 +1201,51 @@ select:focus-visible {
   outline-offset: 2px;
 }
 
-/* Accessibility Widget Styles */
+/* High Contrast Mode */
+.high-contrast {
+  --text: #000000;
+  --text-h: #000000;
+  --bg: #ffffff;
+  --border: #000000;
+  --primary: #000000;
+  --secondary: #000000;
+  --section-bg: #ffffff;
+  --shadow: none;
+}
+
+.high-contrast * {
+  border-color: #000000 !important;
+}
+
+.high-contrast button,
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
+  border: 2px solid #000000 !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.high-contrast a {
+  color: #000000 !important;
+  text-decoration: underline !important;
+}
+
+/* Font Size Controls */
+.font-size-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.font-btn {
+  flex: 1;
+  padding: 10px;
+}
+
+.font-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 .accessibility-widget {
   position: fixed;
   bottom: 24px;

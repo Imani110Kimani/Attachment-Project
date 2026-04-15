@@ -1,9 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const LoginModal = ({ open, onClose, onSignup }) => {
+const LoginModal = ({ open, onClose, onSignup, onLoginSubmit }) => {
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
   const firstInputRef = useRef(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -42,6 +46,21 @@ const LoginModal = ({ open, onClose, onSignup }) => {
     };
   }, [open, onClose]);
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      await onLoginSubmit({ email, password });
+      onClose();
+    } catch (err) {
+      setError(err.message || "Unable to login. Please check your details.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!open) return null;
 
   return (
@@ -60,21 +79,32 @@ const LoginModal = ({ open, onClose, onSignup }) => {
           <p>Login in seconds and book pickup with one tap. No long forms, no waiting.</p>
         </div>
 
-        <form className="login-form" onSubmit={(event) => event.preventDefault()}>
+        <form className="login-form" onSubmit={handleSubmit}>
           <label htmlFor="login-email">Email address</label>
-          <input 
+          <input
             ref={firstInputRef}
-            id="login-email" 
-            type="email" 
-            placeholder="you@domain.com" 
-            required 
+            id="login-email"
+            type="email"
+            placeholder="you@domain.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <label htmlFor="login-password">Password</label>
-          <input id="login-password" type="password" placeholder="Enter password" required />
+          <input
+            id="login-password"
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-          <button type="submit" className="btn login-submit">
-            Login now
+          {error && <p className="form-error">{error}</p>}
+
+          <button type="submit" className="btn login-submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login now"}
           </button>
 
           <div className="login-separator">
