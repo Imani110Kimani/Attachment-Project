@@ -998,6 +998,68 @@ body, html {
   border-radius: 4px;
 }
 
+.contact-delay-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  color: #213c51;
+}
+
+.contact-delay-content h3 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+}
+
+.contact-delay-content p {
+  margin: 0;
+  max-width: 420px;
+  color: #4f6f94;
+}
+
+.contact-delay-loader {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-dot {
+  width: 12px;
+  height: 12px;
+  background: #213c51;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: loaderPulse 1s infinite ease-in-out;
+}
+
+.loader-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loader-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.loader-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes loaderPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
 .phone-screen::after {
   content: '';
   position: absolute;
