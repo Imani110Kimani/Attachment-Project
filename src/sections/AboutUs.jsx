@@ -2,19 +2,21 @@ import React, { useState, useEffect } from "react";
 import aboutsecImg from "../assets/aboutsec.png";
 import aboutsec2Img from "../assets/aboutsec2.png";
 
-const AboutUs = () => {
+const AboutUs = ({ carouselPaused }) => {
   const images = [aboutsecImg, aboutsec2Img];
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
+    if (carouselPaused) return;
+    
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [images.length, carouselPaused]);
 
   return (
-    <section className="about-us">
+    <section id="about" className="about-us">
       <div className="about-wrap">
         <div className="about-copy">
           <h2>Fresh, Fast, and Flawless</h2>

@@ -1,11 +1,13 @@
 import React from "react";
+import ChatBot from "../components/ChatBot";
+import botImg from "../assets/bot.png";
 
 const ContactUs = () => (
   <section className="contact-us">
-    <h2>Contact Us</h2>
-    <p>Email: info@chapchaplaundry.com</p>
-    <p>Phone: +123 456 7890</p>
-    <p>Location: 123 Clean Street, Laundro City</p>
+    <div className="contact-image">
+      <img src={botImg} alt="Chat assistant" />
+    </div>
+    <ChatBot />
   </section>
 );
 

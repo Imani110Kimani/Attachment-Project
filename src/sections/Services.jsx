@@ -1,61 +1,73 @@
-import React, { useState } from "react";
-import serv1 from "../assets/serv1.mp4";
-import serv2 from "../assets/serv2.mp4";
-import pickupImg from "../assets/pickup.jpg";
-import dryCleaningVideo from "../assets/drycleaning.mp4";
+import React, { useState, useEffect } from "react";
+import pickupImg from "../assets/pickup.png";
+import washFoldImg from "../assets/washandfold.png";
+import ironingImg from "../assets/ironing.png";
+import dryCleaningImg from "../assets/drycleaning.png";
 
-const Services = () => {
+const Services = ({ carouselPaused }) => {
   const slides = [
-    [
-      { src: serv1, title: "Express Service", type: "video" },
-      
-    ],
-     [
-      { src: serv1, title: "Wash & Fold", type: "video" },
-      
-    ],
-    [
-      { src: pickupImg, title: "Pickup & Delivery", type: "image" },
-      
-    ],
-     [
-      { src: serv1, title: "Dry Cleaning", type: "video" },
-      
-    ],
-    [
-      { src: dryCleaningVideo, title: "Dry Cleaning", type: "video" }
-    ]
+    {
+      title: "Pickup & Delivery",
+      description:
+        "Our pickup service makes laundry effortless. We collect your clothes from your door, clean them with care, and return them ready to wear.",
+      src: pickupImg,
+      alt: "Pickup and delivery service",
+    },
+    {
+      title: "Wash & Fold",
+      description:
+        "Professional wash and fold service that keeps your clothes soft, fresh, and ready to wear. Perfect for busy schedules.",
+      src: washFoldImg,
+      alt: "Wash and fold service",
+    },
+    {
+      title: "Ironing",
+      description:
+        "Detailed ironing service for sharp, crease-free shirts, trousers, and linens so you always look polished.",
+      src: ironingImg,
+      alt: "Ironing service",
+    },
+    {
+      title: "Dry Cleaning",
+      description:
+        "Premium dry cleaning for delicate fabrics and special garments that need extra care and precision.",
+      src: dryCleaningImg,
+      alt: "Dry cleaning service",
+    },
   ];
-  const [current, setCurrent] = useState(0);
 
-  const next = () => setCurrent((current + 1) % slides.length);
-  const prev = () => setCurrent((current - 1 + slides.length) % slides.length);
+  const [current, setCurrent] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    if (carouselPaused) return;
+    
+    const interval = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setCurrent((prev) => (prev + 1) % slides.length);
+        setVisible(true);
+      }, 1000);
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [slides.length, carouselPaused]);
+
+  const slide = slides[current];
 
   return (
     <section className="services">
-      <div className="services-content">
-        <div className="services-media">
-          <div className="carousel">
-            <button onClick={prev} className="carousel-btn prev">&lt;</button>
-            <div className="slide">
-              {slides[current].map((item, idx) => (
-                <div key={idx} className="video-item">
-                  <h3 className="video-title">{item.title}</h3>
-                  {item.type === "video" ? (
-                    <video controls className="service-video">
-                      <source src={item.src} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  ) : (
-                    <img src={item.src} alt={item.title} className="service-video" />
-                  )}
-                </div>
-              ))}
-            </div>
-            <button onClick={next} className="carousel-btn next">&gt;</button>
-          </div>
+      <div className={`services-wrap service-fade ${visible ? "visible" : "hidden"}`}>
+        <div className="services-image">
+          {slide.src ? (
+            <img src={slide.src} alt={slide.alt} />
+          ) : (
+            <div className="service-placeholder">Image coming soon</div>
+          )}
         </div>
-        
+        <div className="services-copy">
+          <h2>{slide.title}</h2>
+          <p>{slide.description}</p>
+        </div>
       </div>
     </section>
   );

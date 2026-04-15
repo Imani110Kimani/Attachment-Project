@@ -1,65 +1,77 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import AboutUs from "./sections/AboutUs";
 import Services from "./sections/Services";
 import ContactUs from "./sections/ContactUs";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
-import machineImg from "./assets/machine.png";
+import LoginModal from "./components/LoginModal";
+import SignupModal from "./components/SignupModal";
+import Accessibility from "./components/Accessibility";
 import heroVideo from "./assets/serv1.mp4";
 
-
 const Home = () => {
-	const images = [machineImg, machineImg, machineImg];
-	const [imageOrder, setImageOrder] = useState([0, 1, 2]);
-	const [currentSlide, setCurrentSlide] = useState(0);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignupOpen, setIsSignupOpen] = useState(false);
+  const [videoPaused, setVideoPaused] = useState(false);
+  const [carouselPaused, setCarouselPaused] = useState(false);
+  const videoRef = useRef(null);
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setImageOrder(prev => [prev[1], prev[2], prev[0]]);
-		}, 3000);
-		return () => clearInterval(interval);
-	}, []);
+  useEffect(() => {
+    if (videoRef.current) {
+      if (videoPaused) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+    }
+  }, [videoPaused]);
 
-	useEffect(() => {
-		const slideInterval = setInterval(() => {
-			setCurrentSlide(prev => (prev + 1) % 2);
-		}, 8000); // Switch slides every 8 seconds
-		return () => clearInterval(slideInterval);
-	}, []);
+  return (
+    <>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <Header />
+      <h1 className="sr-only">ChapChap Laundry - Professional Laundry Services</h1>
+      <section className="hero-section">
+        <div className="hero-media">
+          <div className="hero-slide hero-video-container active">
+            <video 
+              ref={videoRef}
+              className="hero-video" 
+              src={heroVideo} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
+            />
+          </div>
+          <div className="hero-overlay" />
+        </div>
 
-	return (
-		<>
-			<Header />
-			<section className="hero-section">
-				<div className="hero-media">
-					<div className={`hero-slide hero-images ${currentSlide === 0 ? "active" : ""}`}>
-						{imageOrder.map((index, i) => (
-							<img key={i} src={images[index]} className="hero-img" alt="Laundry Machine" />
-						))}
-					</div>
-
-					<div className={`hero-slide hero-video-container ${currentSlide === 1 ? "active" : ""}`}>
-						<video className="hero-video" src={heroVideo} autoPlay loop muted playsInline />
-					</div>
-
-					<div className="hero-overlay" />
-				</div>
-
-				<div className="hero-info">
-					<button className="btn hero-button">Start Your Wash</button>
-					<p className="hero-note">
-						{currentSlide === 0
-							? "Experience laundry that works around your schedule. Quick pickup, expert care, and spotless results every time."
-							: "See how we handle your laundry with care and precision."}
-					</p>
-				</div>
-			</section>
-			<main>
-				<AboutUs />
-				<Services />
-				<ContactUs />
-			</main>
-		</>
-	);
+        <div className="hero-info">
+          <button className="btn hero-button" onClick={() => setIsLoginOpen(true)}>
+            Start Your Wash
+          </button>
+          <p className="hero-note">
+            Experience laundry that works around your schedule. Quick pickup, expert care, and spotless results every time.
+          </p>
+        </div>
+      </section>
+      <main id="main-content">
+        <AboutUs carouselPaused={carouselPaused} />
+        <Services carouselPaused={carouselPaused} />
+        <ContactUs />
+      </main>
+      <Footer />
+      <Accessibility 
+        videoPaused={videoPaused}
+        onVideoToggle={() => setVideoPaused(!videoPaused)}
+        carouselPaused={carouselPaused}
+        onCarouselToggle={() => setCarouselPaused(!carouselPaused)}
+      />
+      <LoginModal open={isLoginOpen} onClose={() => setIsLoginOpen(false)} onSignup={() => { setIsLoginOpen(false); setIsSignupOpen(true); }} />
+      <SignupModal open={isSignupOpen} onClose={() => setIsSignupOpen(false)} onLogin={() => { setIsSignupOpen(false); setIsLoginOpen(true); }} />
+    </>
+  );
 };
 
 export default Home;

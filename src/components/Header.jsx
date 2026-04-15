@@ -13,13 +13,13 @@ const Header = () => (
       <a href="#contact">Contact</a>
     </nav>
     <div className="social-icons">
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="facebook">
         <FacebookIcon />
       </a>
-      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="X">
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="X" className="twitter">
         <XIcon />
       </a>
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="instagram">
         <InstagramIcon />
       </a>
     </div>
