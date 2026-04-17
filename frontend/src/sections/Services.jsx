@@ -55,7 +55,7 @@ const Services = ({ carouselPaused }) => {
   const slide = slides[current];
 
   return (
-    <section className="services">
+    <section id="services" className="services">
       <div className={`services-wrap service-fade ${visible ? "visible" : "hidden"}`}>
         <div className="services-image">
           {slide.src ? (

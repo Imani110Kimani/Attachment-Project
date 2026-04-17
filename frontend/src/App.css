@@ -1363,6 +1363,45 @@ select:focus-visible {
   padding-bottom: 12px;
 }
 
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--section-bg);
+  padding-bottom: 12px;
+}
+
+.panel-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--primary);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 1.2rem;
+}
+
+.close-button:hover {
+  background: rgba(33, 60, 81, 0.1);
+  color: var(--primary);
+}
+
+.close-button:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 1px;
+}
+
 .control-group {
   margin-bottom: 12px;
 }
@@ -1475,6 +1514,36 @@ select:focus-visible {
   }
 }
 
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.contact-image.slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.chat-container.slide-in-right {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
 @media (max-width: 900px) {
   .contact-us {
     flex-direction: column;
@@ -1568,4 +1637,5 @@ select:focus-visible {
     width: 100%;
     max-width: 100%;
   }
+  
 }
