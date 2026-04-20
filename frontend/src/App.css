@@ -1,3 +1,42 @@
+/* Accessibility Feature Classes */
+.text-spacing * {
+  letter-spacing: 0.12em !important;
+  word-spacing: 0.16em !important;
+}
+
+.large-cursor, .large-cursor * {
+  cursor: url('https://cdn.jsdelivr.net/gh/ionic-team/ionicons@5.5.2/src/svg/arrow-forward-outline.svg'), auto !important;
+  cursor: pointer !important;
+}
+
+.dyslexia-font, .dyslexia-font * {
+  font-family: 'OpenDyslexic', Arial, sans-serif !important;
+}
+
+@font-face {
+  font-family: 'OpenDyslexic';
+  src: url('https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.0/otf/OpenDyslexic-Regular.otf') format('opentype');
+}
+
+.desaturate {
+  filter: grayscale(1) !important;
+}
+
+.hide-images img, .hide-images svg, .hide-images picture, .hide-images video {
+  display: none !important;
+}
+
+.highlight-links a {
+  background: yellow !important;
+  color: #000 !important;
+  outline: 2px solid orange !important;
+  text-decoration: underline !important;
+}
+
+body {
+  line-height: var(--custom-line-height, 1.45) !important;
+  text-align: var(--custom-text-align, left) !important;
+}
 /* Header Styles */
 .main-header {
   width: 100%;
