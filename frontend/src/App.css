@@ -1,3 +1,16 @@
+/* Ensure AboutUs and ContactUs content is above watermark pseudo-elements */
+.about-wrap {
+  position: relative;
+  z-index: 2;
+}
+.services-wrap {
+  position: relative;
+  z-index: 2;
+}
+.contact-us > * {
+  position: relative;
+  z-index: 2;
+}
 /* Accessibility Feature Classes */
 .text-spacing * {
   letter-spacing: 0.12em !important;

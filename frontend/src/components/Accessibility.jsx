@@ -25,7 +25,9 @@ import RefreshIcon from "@mui/icons-material/Refresh";
  *   line height, text align, desaturate, hide images, highlight links)
  */
 
+
 const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselPaused }) => {
+  // All state and refs at the top
   const [panelOpen, setPanelOpen] = useState(false);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const [highContrast, setHighContrast] = useState(false);
@@ -39,10 +41,77 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
   const [desaturate, setDesaturate] = useState(false);
   const [hideImages, setHideImages] = useState(false);
   const [highlightLinks, setHighlightLinks] = useState(false);
-
   const buttonRef = useRef(null);
   const panelRef = useRef(null);
   const isMobile = useMediaQuery("(max-width:600px)");
+
+  // Escape key and click-outside handling
+  useEffect(() => {
+    const handleEscapeKey = (e) => {
+      if (e.key === "Escape") {
+        setPanelOpen(false);
+        setMenuAnchorEl(null);
+      }
+    };
+    const handleClickOutside = (e) => {
+      if (panelRef.current && !panelRef.current.contains(e.target) &&
+          buttonRef.current && !buttonRef.current.contains(e.target)) {
+        setPanelOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscapeKey);
+    if (panelOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [panelOpen, menuAnchorEl]);
+
+  // Apply accessibility classes and styles to body
+  useEffect(() => {
+    const body = document.body;
+    // Helper to toggle a class
+    const toggleClass = (cls, enabled) => {
+      if (enabled) {
+        body.classList.add(cls);
+      } else {
+        body.classList.remove(cls);
+      }
+    };
+    toggleClass('text-spacing', textSpacing);
+    toggleClass('large-cursor', largeCursor);
+    toggleClass('dyslexia-font', dyslexiaFont);
+    toggleClass('desaturate', desaturate);
+    toggleClass('hide-images', hideImages);
+    toggleClass('highlight-links', highlightLinks);
+    // High contrast
+    if (highContrast) {
+      body.style.background = '#000';
+      body.style.color = '#fff';
+    } else {
+      body.style.background = '';
+      body.style.color = '';
+    }
+    // Font size (using CSS variable)
+    body.style.setProperty('--font-size-multiplier', fontSize);
+    // Line height and text align
+    body.style.setProperty('--custom-line-height', lineHeight);
+    body.style.setProperty('--custom-text-align', textAlign);
+    // Dyslexia font loads font-face in App.css
+    // Tooltips: could be handled globally if needed
+    return () => {
+      // Clean up all classes and styles
+      body.classList.remove('text-spacing', 'large-cursor', 'dyslexia-font', 'desaturate', 'hide-images', 'highlight-links');
+      body.style.background = '';
+      body.style.color = '';
+      body.style.removeProperty('--font-size-multiplier');
+      body.style.removeProperty('--custom-line-height');
+      body.style.removeProperty('--custom-text-align');
+    };
+  }, [textSpacing, largeCursor, dyslexiaFont, desaturate, hideImages, highlightLinks, highContrast, fontSize, lineHeight, textAlign]);
 
   // Escape key and click-outside handling
   useEffect(() => {
