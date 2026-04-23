@@ -89,11 +89,9 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
     toggleClass('highlight-links', highlightLinks);
     // High contrast
     if (highContrast) {
-      body.style.background = '#000';
-      body.style.color = '#fff';
+      body.classList.add('high-contrast');
     } else {
-      body.style.background = '';
-      body.style.color = '';
+      body.classList.remove('high-contrast');
     }
     // Font size (using CSS variable)
     body.style.setProperty('--font-size-multiplier', fontSize);
@@ -104,9 +102,7 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
     // Tooltips: could be handled globally if needed
     return () => {
       // Clean up all classes and styles
-      body.classList.remove('text-spacing', 'large-cursor', 'dyslexia-font', 'desaturate', 'hide-images', 'highlight-links');
-      body.style.background = '';
-      body.style.color = '';
+      body.classList.remove('text-spacing', 'large-cursor', 'dyslexia-font', 'desaturate', 'hide-images', 'highlight-links', 'high-contrast');
       body.style.removeProperty('--font-size-multiplier');
       body.style.removeProperty('--custom-line-height');
       body.style.removeProperty('--custom-text-align');
@@ -217,7 +213,7 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
           anchorEl={menuAnchorEl}
           open={Boolean(menuAnchorEl)}
           onClose={handleMenuClose}
-          PaperProps={{ style: { width: "260px" } }}
+          PaperProps={{ style: { width: "260px", maxHeight: "80vh", overflow: "auto" } }}
           MenuListProps={{ "aria-label": "Accessibility controls" }}
         >
           <MenuItem

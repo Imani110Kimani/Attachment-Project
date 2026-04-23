@@ -35,11 +35,32 @@
   filter: grayscale(1) !important;
 }
 
+/* Your existing rule — keep this */
 .hide-images img, .hide-images svg, .hide-images picture, .hide-images video {
   display: none !important;
 }
 
-.highlight-links a {
+/* Add this below it */
+body.hide-images [style*="background-image"],
+body.hide-images [class*="hero"]:not(button),
+body.hide-images [class*="banner"],
+body.hide-images [class*="cover"],
+body.hide-images [class*="bg-image"],
+body.hide-images [class*="background"] {
+  background-image: none !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.hide-images [style*="background-image"] *,
+body.hide-images [class*="hero"] *,
+body.hide-images [class*="banner"] * {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+.highlight-links a,
+.highlight-links button {
   background: yellow !important;
   color: #000 !important;
   outline: 2px solid orange !important;
@@ -821,7 +842,7 @@ body, html {
 
 .services {
   position: relative;
-  padding: 60px 24px;
+  padding: 90px 54px 48px 70px;
   overflow: hidden;
 }
 
@@ -844,7 +865,7 @@ body, html {
 .services-wrap {
   position: relative;
   z-index: 1;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -868,7 +889,7 @@ body, html {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  height: 420px;
+  height: 480px;
 }
 
 .services-image img,
@@ -962,7 +983,7 @@ body, html {
   justify-content: flex-start;
   width: 100%;
   overflow: hidden;
-  padding-top: 64px;
+  padding-top: 100px;
   padding-bottom: 48px;
   perspective: 1300px;
 }
@@ -1317,32 +1338,127 @@ select:focus-visible {
 
 /* High Contrast Mode */
 .high-contrast {
-  --text: #000000;
-  --text-h: #000000;
-  --bg: #ffffff;
-  --border: #000000;
-  --primary: #000000;
-  --secondary: #000000;
-  --section-bg: #ffffff;
-  --shadow: none;
+  --text: #fff !important;
+  --text-h: #fff !important;
+  --bg: #000 !important;
+  --border: #333 !important;
+  --primary: #fff !important;
+  --secondary: #fff !important;
+  --background: #000 !important;
+  --section-bg: #000 !important;
+  --shadow: none !important;
+  background: #000 !important;
+  color: #fff !important;
 }
 
 .high-contrast * {
-  border-color: #000000 !important;
+  border-color: #333 !important;
 }
 
 .high-contrast button,
 .high-contrast input,
 .high-contrast select,
 .high-contrast textarea {
-  border: 2px solid #000000 !important;
-  background: #ffffff !important;
-  color: #000000 !important;
+  border: 2px solid #333 !important;
+  background: #000 !important;
+  color: #fff !important;
 }
 
 .high-contrast a {
-  color: #000000 !important;
+  color: #fff !important;
   text-decoration: underline !important;
+}
+
+.high-contrast .highlight-links a {
+  background: #333 !important;
+  color: #fff !important;
+  outline: 2px solid #666 !important;
+}
+
+.high-contrast .hide-images [style*="background-image"],
+.high-contrast .hide-images [class*="hero"],
+.high-contrast .hide-images [class*="banner"],
+.high-contrast .hide-images [class*="cover"],
+.high-contrast .hide-images [class*="bg-image"],
+.high-contrast .hide-images [class*="background"] {
+  background-image: none !important;
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+.high-contrast .hide-images [style*="background-image"] *,
+.high-contrast .hide-images [class*="hero"] *,
+.high-contrast .hide-images [class*="banner"] * {
+  color: #fff !important;
+  text-shadow: none !important;
+}
+
+.high-contrast .about-us {
+  background: #000 !important;
+}
+
+.high-contrast .about-us::before {
+  color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.high-contrast .services::before {
+  color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.high-contrast .chat-container {
+  background: #000 !important;
+  border: 2px solid #333 !important;
+}
+
+.high-contrast .chat-container::before {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.high-contrast .phone-screen {
+  background: #000 !important;
+  border: 1px solid #333 !important;
+}
+
+.high-contrast .phone-screen::before {
+  background: #333 !important;
+}
+
+.high-contrast .phone-screen::after {
+  background: #666 !important;
+}
+
+.high-contrast .message.bot {
+  background: #333 !important;
+  color: #fff !important;
+  border: 1px solid #666 !important;
+}
+
+.high-contrast .message.user {
+  background: #666 !important;
+  color: #fff !important;
+  border: 1px solid #999 !important;
+}
+
+.high-contrast .faq-button {
+  background: #333 !important;
+  color: #fff !important;
+  border: 2px solid #666 !important;
+}
+
+.high-contrast .faq-button:hover,
+.high-contrast .faq-button:focus-visible {
+  background: #666 !important;
+  border-color: #999 !important;
+}
+
+.high-contrast .chat-input-form input {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #666 !important;
+}
+
+.high-contrast .chat-input-form input:focus {
+  border-color: #fff !important;
 }
 
 /* Font Size Controls */
@@ -1396,15 +1512,20 @@ select:focus-visible {
 }
 
 .accessibility-panel {
-  position: absolute;
-  bottom: 70px;
-  right: 0;
+  position: fixed;
   background: white;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   padding: 20px;
   min-width: 240px;
   animation: slideUp 0.3s ease;
+  bottom: 80px; /* position above the button */
+  right: 20px;
+  max-height: calc(100vh - 100px); /* leave room for button + margins */
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 9999;
+  /* your existing styles... */
 }
 
 .accessibility-panel h3 {
@@ -1609,7 +1730,7 @@ select:focus-visible {
 
 .about-us {
   position: relative;
-  padding: 60px 24px;
+  padding: 90px 24px;
   background: #ffffff;
   overflow: hidden;
 }
