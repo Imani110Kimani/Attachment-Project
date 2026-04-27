@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import LoginModal from "./components/LoginModal";
 import SignupModal from "./components/SignupModal";
 import Accessibility from "./components/Accessibility";
+import GoogleAd from "./components/GoogleAd";
 import heroVideo from "./assets/serv1.mp4";
 
 const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:4000";
@@ -124,7 +125,7 @@ const Home = () => {
 
   return (
     <>
-      <a href="#main-content" className="skip-link">Skip to main content</a>
+      {/* <a href="#main-content" className="skip-link">Skip to main content</a> */}
       <Header />
       <h1 className="sr-only">ChapChap Laundry - Professional Laundry Services</h1>
       <section className="hero-section">
@@ -152,12 +153,16 @@ const Home = () => {
           </button>
           {user && <p className="hero-welcome">Welcome back, {user.fullName.split(" ")[0]}!</p>}
           <p className="hero-note">
-            Experience laundry that works around your schedule. Quick pickup, expert care, and spotless results every time.
+            Experience laundry pickup service that works around your schedule, with quick same day laundry delivery, expert care, and spotless results every time.
           </p>
         </div>
       </section>
       <main id="main-content">
         <AboutUs carouselPaused={carouselPaused} />
+        <GoogleAd
+          client="ca-pub-XXXXXXXXXXXXXXXX"
+          slot="1234567890"
+        />
         <Services carouselPaused={carouselPaused} />
         <ContactUs />
       </main>

@@ -64,8 +64,8 @@ const LoginModal = ({ open, onClose, onSignup, onLoginSubmit }) => {
   if (!open) return null;
 
   return (
-    <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="login-modal-title">
-      <div className="login-modal" ref={modalRef}>
+    <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="login-modal-title" onClick={onClose}>
+      <div className="login-modal" ref={modalRef} onClick={(e) => e.stopPropagation()}>
         <button 
           ref={closeButtonRef}
           className="modal-close" 
@@ -112,7 +112,7 @@ const LoginModal = ({ open, onClose, onSignup, onLoginSubmit }) => {
           </div>
 
           <button type="button" className="btn google-button" disabled>
-            Use Google Instead
+            Use&nbsp;<span className="google-text"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></span>&nbsp;Instead
           </button>
 
           <p className="login-note">

@@ -65,8 +65,8 @@ const SignupModal = ({ open, onClose, onLogin, onSignupSubmit }) => {
   if (!open) return null;
 
   return (
-    <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="signup-modal-title">
-      <div className="signup-modal" ref={modalRef}>
+    <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="signup-modal-title" onClick={onClose}>
+      <div className="signup-modal" ref={modalRef} onClick={(e) => e.stopPropagation()}>
         <button 
           ref={closeButtonRef}
           className="modal-close" 
@@ -123,7 +123,7 @@ const SignupModal = ({ open, onClose, onLogin, onSignupSubmit }) => {
           </div>
 
           <button type="button" className="btn google-button" disabled>
-            Sign up with Google
+            Sign up with&nbsp;<span className="google-text"><span></span><span> G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e </span></span>
           </button>
 
           <p className="signup-note">

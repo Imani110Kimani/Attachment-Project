@@ -72,6 +72,7 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
 
   // Apply accessibility classes and styles to body
   useEffect(() => {
+    const root = document.documentElement;
     const body = document.body;
     // Helper to toggle a class
     const toggleClass = (cls, enabled) => {
@@ -93,8 +94,8 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
     } else {
       body.classList.remove('high-contrast');
     }
-    // Font size (using CSS variable)
-    body.style.setProperty('--font-size-multiplier', fontSize);
+    // Font size (using CSS variable on :root)
+    root.style.setProperty('--font-size-multiplier', fontSize);
     // Line height and text align
     body.style.setProperty('--custom-line-height', lineHeight);
     body.style.setProperty('--custom-text-align', textAlign);
@@ -103,36 +104,11 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
     return () => {
       // Clean up all classes and styles
       body.classList.remove('text-spacing', 'large-cursor', 'dyslexia-font', 'desaturate', 'hide-images', 'highlight-links', 'high-contrast');
-      body.style.removeProperty('--font-size-multiplier');
+      root.style.removeProperty('--font-size-multiplier');
       body.style.removeProperty('--custom-line-height');
       body.style.removeProperty('--custom-text-align');
     };
   }, [textSpacing, largeCursor, dyslexiaFont, desaturate, hideImages, highlightLinks, highContrast, fontSize, lineHeight, textAlign]);
-
-  // Escape key and click-outside handling
-  useEffect(() => {
-    const handleEscapeKey = (e) => {
-      if (e.key === "Escape") {
-        setPanelOpen(false);
-        setMenuAnchorEl(null);
-      }
-    };
-    const handleClickOutside = (e) => {
-      if (panelRef.current && !panelRef.current.contains(e.target) &&
-          buttonRef.current && !buttonRef.current.contains(e.target)) {
-        setPanelOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleEscapeKey);
-    if (panelOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [panelOpen, menuAnchorEl]);
 
   // Focus management for panel opening
   useEffect(() => {
