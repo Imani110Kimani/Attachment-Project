@@ -22,7 +22,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
  * - Reset settings button
  * - Focus management and trapping prevention
  * - Advanced accessibility controls (text spacing, cursor, dyslexia font, tooltips,
- *   line height, text align, desaturate, hide images, highlight links)
+ *   line height, desaturate, hide images, highlight links)
  */
 
 
@@ -37,7 +37,6 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
   const [dyslexiaFont, setDyslexiaFont] = useState(false);
   const [tooltipsEnabled, setTooltipsEnabled] = useState(true);
   const [lineHeight, setLineHeight] = useState(1.45);
-  const [textAlign, setTextAlign] = useState("left");
   const [desaturate, setDesaturate] = useState(false);
   const [hideImages, setHideImages] = useState(false);
   const [highlightLinks, setHighlightLinks] = useState(false);
@@ -96,9 +95,8 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
     }
     // Font size (using CSS variable on :root)
     root.style.setProperty('--font-size-multiplier', fontSize);
-    // Line height and text align
+    // Line height
     body.style.setProperty('--custom-line-height', lineHeight);
-    body.style.setProperty('--custom-text-align', textAlign);
     // Dyslexia font loads font-face in App.css
     // Tooltips: could be handled globally if needed
     return () => {
@@ -106,7 +104,6 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
       body.classList.remove('text-spacing', 'large-cursor', 'dyslexia-font', 'desaturate', 'hide-images', 'highlight-links', 'high-contrast');
       root.style.removeProperty('--font-size-multiplier');
       body.style.removeProperty('--custom-line-height');
-      body.style.removeProperty('--custom-text-align');
     };
   }, [textSpacing, largeCursor, dyslexiaFont, desaturate, hideImages, highlightLinks, highContrast, fontSize, lineHeight, textAlign]);
 
@@ -146,7 +143,6 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
     setDyslexiaFont(false);
     setTooltipsEnabled(true);
     setLineHeight(1.45);
-    setTextAlign("left");
     setDesaturate(false);
     setHideImages(false);
     setHighlightLinks(false);
@@ -307,20 +303,6 @@ const Accessibility = ({ onVideoToggle, videoPaused, onCarouselToggle, carouselP
                 style={{ width: 120 }}
               />
               <span style={{ marginLeft: 8 }}>{lineHeight.toFixed(2)}</span>
-            </div>
-            <div className="control-group">
-              <label style={{ display: "block", marginBottom: 4 }}>Text Align</label>
-              <select
-                value={textAlign}
-                onChange={(e) => setTextAlign(e.target.value)}
-                aria-label="Text alignment"
-                title="Text alignment"
-              >
-                <option value="left">Left</option>
-                <option value="center">Center</option>
-                <option value="right">Right</option>
-                <option value="justify">Justify</option>
-              </select>
             </div>
             <div className="control-group">
               <button

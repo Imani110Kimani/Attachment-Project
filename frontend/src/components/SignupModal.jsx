@@ -127,7 +127,7 @@ const SignupModal = ({ open, onClose, onLogin, onSignupSubmit }) => {
           </button>
 
           <p className="signup-note">
-            Already have an account? <a href="#login" onClick={(e) => { e.preventDefault(); onLogin(); }}>Login here</a>.
+            Already have an account? <button type="button" className="modal-link" onClick={onLogin}>Login here</button>.
           </p>
         </form>
       </div>

@@ -116,7 +116,7 @@ const LoginModal = ({ open, onClose, onSignup, onLoginSubmit }) => {
           </button>
 
           <p className="login-note">
-            Don't have an account? <a href="#create-account" onClick={(e) => { e.preventDefault(); onSignup(); }}>Create one</a> in seconds.
+            Don't have an account? <button type="button" className="modal-link" onClick={onSignup}>Create one</button> in seconds.
           </p>
         </form>
       </div>

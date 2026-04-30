@@ -69,7 +69,6 @@ body.hide-images [class*="banner"] * {
 
 body {
   line-height: var(--custom-line-height, 1.45) !important;
-  text-align: var(--custom-text-align, left) !important;
 }
 /* Header Styles */
 .main-header {
@@ -806,14 +805,23 @@ body, html {
 }
 
 .login-note a,
-.signup-note a {
+.signup-note a,
+.login-note .modal-link,
+.signup-note .modal-link {
   color: #213c51;
   text-decoration: none;
   font-weight: 700;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
 }
 
 .login-note a:hover,
-.signup-note a:hover {
+.signup-note a:hover,
+.login-note .modal-link:hover,
+.signup-note .modal-link:hover {
   text-decoration: underline;
 }
 
