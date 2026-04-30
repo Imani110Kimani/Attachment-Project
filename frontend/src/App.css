@@ -263,7 +263,12 @@ body, html {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: transparent;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.55) 55%,
+    rgba(0, 0, 0, 0.75) 100%
+  );
   pointer-events: none;
   z-index: 1;
 }
@@ -612,21 +617,21 @@ body, html {
 
 .login-modal,
 .signup-modal {
-  width: min(440px, 100%);
+  width: min(420px, 100%);
   background: #ffffff;
   border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 30px 70px rgba(17, 31, 67, 0.18);
+  padding: 16px;
+  box-shadow: 0 24px 60px rgba(17, 31, 67, 0.16);
   position: relative;
-  max-width: 440px;
-  max-height: 88vh;
+  max-width: 420px;
+  max-height: calc(100vh - 32px);
   overflow-y: auto;
   border: 1px solid rgba(33, 60, 81, 0.08);
 }
 
 .login-modal-header,
 .signup-modal-header {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   text-align: left;
 }
 
@@ -663,17 +668,17 @@ body, html {
 .login-form,
 .signup-form {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .login-form label,
 .signup-form label {
   color: #5a6a84;
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   display: inline-block;
 }
 
@@ -681,7 +686,7 @@ body, html {
 .signup-form input {
   width: 100%;
   max-width: 100%;
-  padding: 14px 16px;
+  padding: 12px 14px;
   border: 1px solid #d9e4ef;
   border-radius: 18px;
   font-size: 0.96rem;
@@ -721,8 +726,8 @@ body, html {
 .google-button {
   width: 100%;
   border-radius: 14px;
-  padding: 13px 16px;
-  font-size: 0.98rem;
+  padding: 12px 14px;
+  font-size: 0.96rem;
   font-weight: 700;
   border: none;
 }
@@ -1257,10 +1262,13 @@ body, html {
 }
 
 .signup-form label {
-  color: #33415b;
-  font-weight: 600;
-  margin-bottom: 6px;
-  display: block;
+  color: #5a6a84;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: inline-block;
 }
 
 /* Accessibility Styles */
